@@ -74,33 +74,24 @@
 // })
 
 $(function () {
-  /*登录和注册切换*/
-  //点击去注册账号的链接
-  $("#link_reg").on("click", function () {
-    $(".reg-box").show()
+  $("#link-login").on("click", function () {
     $(".login-box").hide()
+    $(".reg-box").show()
   })
-  $("#link_login").on("click", function () {
-    $(".reg-box").hide();
-    $(".login-box").show();
+  $("#link-reg").on("click", function () {
+    $(".login-box").show()
+    $(".reg-box").hide()
   })
-
-  /*form表单验证规则*/
-  //从layui中获取form对象
-  var form = layui.form
-  //通过form.verify()函数自定义检测规则
+  var form = layui.form;
+  // 通过 form.verify() 函数自定义校验规则
   form.verify({
-    //\S指不能有空格
-    pwd: [/^[\S]{6,12}$/, "密码必须是6到12位，且不能出现空格"],
-    repwd: function (value) {
-      //通过形参拿到的是再次确认密码框中的内容
-      //还要拿到密码框的内容
-      //把两个密码做个判断
-      //结果不一致就提示
+    psd: [/^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'],
+    repsd: function (value) {
       var mima = $(".reg-box [name=password]").val()
-      if (mima != value) {
-        return "两次密码不一致"
+      if (value != mima) {
+        return "两次密码输入不一致"
       }
     }
+
   })
 })
